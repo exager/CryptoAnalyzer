@@ -2,9 +2,13 @@ import os
 from utils.list_coins import load_coin_list
 from utils.time_utils import get_current_date, get_current_time
 from fetch_apis.get_crypto_data import fetch_crypto_data
-from uploader.gcs import upload_data
+from gcs_interface.uploader import upload_data
+from gcs_interface.manage_crypto import run_coin_history
 
 def run(gcs_bucket: str = os.getenv("GCS_BUCKET")):
+    if get_current_time()[:5] == '00-00':
+        run_coin_history(gcs_bucket)
+
     coins = load_coin_list()
     coins = coins.replace(',','%2C')
     url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd" + "&symbols=" + coins + "&order=market_cap_desc"

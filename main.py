@@ -2,6 +2,7 @@ from flask import Flask, Request, jsonify
 from pipeline.run_pipeline import run
 from werkzeug.datastructures import Headers
 from utils.time_utils import get_current_date, get_current_time
+from gcs_interface.downloader import get_recent_data
 
 app = Flask(__name__)
 
@@ -16,6 +17,14 @@ def run_job():
         return jsonify({"status": "Pipeline executed"}), 200
     except Exception as e:
         return jsonify({"error": f"Got an error while trying to run the pipeline on {get_current_date()} at {get_current_time}: " + str(e)}), 500
+
+@app.route("/get-latest-data", methods = ["GET"])
+def get_crypto_prices():
+    try:
+        recent_data = get_recent_data()
+        return jsonify(recent_data), 200
+    except Exception as e:
+        return jsonify({"error": f"Got an error while fetching the data on {get_current_date()} at {get_current_time}: " + str(e)}), 500
 
 def main(request: Request):
 
