@@ -6,8 +6,7 @@ import pandas as pd
 def fetch_crypto_data(url, hdr):
     
     response = requests.get(url, headers=hdr)
-
-    df = pd.read_json(StringIO(response.text))
+    df = pd.DataFrame(response.json())
 
     df['recorded_time'] = str(get_current_date()) + "T" + str(get_current_time())
     cleaned_data = df.to_json(orient='records',indent = 4)
