@@ -6,9 +6,6 @@ from gcs_interface.uploader import upload_data
 from gcs_interface.manage_crypto import run_coin_history
 
 def run(gcs_bucket: str = os.getenv("GCS_BUCKET")):
-    if get_current_time()[:5] == '00-00':
-        run_coin_history(gcs_bucket)
-
     coins = load_coin_list()
     coins = coins.replace(',','%2C')
     url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd" + "&symbols=" + coins + "&order=market_cap_desc"
@@ -24,3 +21,5 @@ def run(gcs_bucket: str = os.getenv("GCS_BUCKET")):
     dest_file_location = 'market/crypto/' + str(get_current_date()) + '/T' + str(get_current_time()) + '.json'
     uploader_msg = upload_data(os.getenv("GCS_BUCKET"), market_data, dest_file_location)
     print(uploader_msg)
+    if get_current_time()[:5] == '00-00':
+        run_coin_history(gcs_bucket)
