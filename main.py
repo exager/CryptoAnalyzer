@@ -1,5 +1,5 @@
 from flask import Flask, Request, jsonify
-from pipeline.run_pipeline import run
+from pipeline.run_pipeline import run_hourly_updates, get_daily_currency_data
 from werkzeug.datastructures import Headers
 from utils.time_utils import get_current_date, get_current_time
 from gcs_interface.downloader import get_recent_data
@@ -14,10 +14,11 @@ def status_check():
 @app.route("/run", methods = ["POST"])
 def run_job():
     try:
-        run()
-        return jsonify({"status": "Pipeline executed"}), 200
+        update1 = run_hourly_updates()
+        update2 = get_daily_currency_data()
+        return jsonify({"status-1": update1, "status-2": update2}), 200
     except Exception as e:
-        return jsonify({"error": f"Got an error while trying to run the pipeline on {get_current_date()} at {get_current_time}: " + str(e)}), 500
+        return jsonify({"error": f"Got an error while trying to run the pipeline on {get_current_date()} at {get_current_time()}: " + str(e)}), 500
 
 @app.route("/get-latest-data", methods = ["GET"])
 def get_crypto_prices():
