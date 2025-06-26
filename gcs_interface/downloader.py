@@ -19,7 +19,7 @@ def download_file_data(bucket_name, filepath):
         content = json.loads(blob_file.download_as_text())
         return content
     else:
-        return {}
+        return []
 
 def list_files_in_bucket(bucket_name = os.getenv("GCS_BUCKET"), prefix = None):
     client = storage.Client()

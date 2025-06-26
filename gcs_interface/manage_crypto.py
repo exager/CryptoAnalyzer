@@ -12,15 +12,13 @@ def run_coin_history(bucket_name: str):
     crypto_path = 'market/crypto/'
     files_to_append = list_files_in_bucket(bucket_name = bucket_name, prefix = crypto_path)
     if len(blobs) > 0:
-        prev_day_filepath = crypto_path + get_previous_date() +'/'
+        prev_day_filepath = crypto_path + get_previous_date()
         files_to_append = list_files_in_bucket(bucket_name = bucket_name, prefix = prev_day_filepath)
 
     create_coin_data(bucket_name, files_to_append, coins, destination = 'market/currency/')
 
 
 def create_coin_data(bucket_name: str, file_list, coins, destination):
-    market_data_address = 'market/crypto/'
-    blobs = list_files_in_bucket(bucket_name = bucket_name, prefix = market_data_address)
     coins_dict = {}
     for coin in coins:
          coins_dict[coin] = []
@@ -45,6 +43,7 @@ def create_coin_data(bucket_name: str, file_list, coins, destination):
     for coin in coins:
         curr_path = destination + coin + '.json'
         data = download_file_data(bucket_name = bucket_name, filepath = curr_path)
-        data.append(coins_dict[coin])
+        for timestamp_data in coins_dict[coin]:
+            data.append(timestamp_data)
         # Now that we have the data, just upload it whole
         upload_data(bucket_name = bucket_name, source_data = json.dumps(data), destination_blob_name = curr_path)
