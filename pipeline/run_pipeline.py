@@ -8,7 +8,7 @@ from gcs_interface.manage_crypto import run_coin_history
 
 def run_hourly_updates(gcs_bucket: str = os.getenv("GCS_BUCKET")):
     file_name = f'market/crypto/{ get_current_date() }/T{ get_current_time()[:2]}'
-    if len(list_files_in_bucket(gcs_bucket)) > 0:
+    if len(list_files_in_bucket(gcs_bucket, file_name)) > 0:
         return "File is already present, no need to re-upload"
     coins = load_coin_list()
     coins = coins.replace(',','%2C')
