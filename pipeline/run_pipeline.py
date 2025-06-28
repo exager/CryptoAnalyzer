@@ -5,6 +5,7 @@ from fetch_apis.get_crypto_data import fetch_crypto_data
 from gcs_interface.uploader import upload_data
 from gcs_interface.downloader import list_files_in_bucket
 from gcs_interface.manage_crypto import run_coin_history
+from utils.logger import logger
 
 def run_hourly_updates(gcs_bucket: str = os.getenv("GCS_BUCKET")):
     file_name = f'market/crypto/{ get_current_date() }/T{ get_current_time()[:2]}'
@@ -27,7 +28,8 @@ def run_hourly_updates(gcs_bucket: str = os.getenv("GCS_BUCKET")):
     return uploader_msg
 
 def get_daily_currency_data(gcs_bucket: str = os.getenv("GCS_BUCKET")):
-    if get_current_time()[:2] == '00':
+    if get_current_time()[:2] == '23':
         run_coin_history(gcs_bucket)
+        logger.info(f'Updating the data for currency files for {get_current_date()}, {get_current_time()}')
         return "Uploaded into the bins"
     return "Not the time"
