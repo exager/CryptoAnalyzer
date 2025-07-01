@@ -1,6 +1,5 @@
 from flask import Flask, Request, jsonify, request
-from pipeline.run_pipeline import run_hourly_updates, get_daily_currency_data
-from werkzeug.datastructures import Headers
+from pipeline.run_pipeline import run_hourly_updates, run_currency_data
 from utils.time_utils import get_current_date, get_current_time
 from gcs_interface.downloader import get_recent_data, coin_data
 import os
@@ -24,7 +23,7 @@ def run_job():
         return jsonify({"error": "Unauthorized"}), 401
     try:
         update1 = run_hourly_updates()
-        update2 = get_daily_currency_data()
+        update2 = run_currency_data()
         return jsonify({"status-1": update1, "status-2": update2}), 200
     except Exception as e:
         logger.error(f'Pipeline Run Failure:\n {traceback.print_exc()}')
