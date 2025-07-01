@@ -16,8 +16,8 @@ def run_coin_history(bucket_name: str):
     files_to_append = list_files_in_bucket(bucket_name = bucket_name, prefix = crypto_path)
     if len(blobs) > 0:
         logger.info(f'  Coins data already present, moving ahead with appending the files...')
-        prev_day_filepath = crypto_path + get_previous_date()
-        files_to_append = list_files_in_bucket(bucket_name = bucket_name, prefix = prev_day_filepath)
+        curr_hour_filepath = crypto_path + get_current_date() +'/T' + get_current_time()[:2]
+        files_to_append = list_files_in_bucket(bucket_name = bucket_name, prefix = curr_hour_filepath)
 
     create_coin_data(bucket_name, files_to_append, coins, destination = 'market/currency/')
 

@@ -27,9 +27,8 @@ def run_hourly_updates(gcs_bucket: str = os.getenv("GCS_BUCKET")):
     uploader_msg = upload_data(os.getenv("GCS_BUCKET"), market_data, dest_file_location)
     return uploader_msg
 
-def get_daily_currency_data(gcs_bucket: str = os.getenv("GCS_BUCKET")):
-    if get_current_time()[:2] == '23':
-        run_coin_history(gcs_bucket)
-        logger.info(f'Updating the data for currency files for {get_current_date()}, {get_current_time()}')
-        return "Uploaded into the bins"
-    return "Not the time"
+def run_currency_data(gcs_bucket: str = os.getenv("GCS_BUCKET")):
+    run_coin_history(gcs_bucket)
+    logger.info(f'Updating the data for currency files for {get_current_date()}, {get_current_time()}')
+    return "Uploaded into the bins"
+   
