@@ -26,8 +26,7 @@
 
 # 🌐 Live API Endpoint
 
-**Base URL:**  
-[CryptoAnalyzer](https://crypto-analyzer-service-1073952782451.us-central1.run.app/)
+**Base URL:**  [CryptoAnalyzer](https://crypto-analyzer-service-1073952782451.us-central1.run.app/)
 
 ---
 
@@ -86,7 +85,7 @@ This project is designed to run **exclusively on GCP**:
 And Voila, the crypto pipeline for your system is now up and running.
 Want to check, just head to your browser and type in:
 > <URI_FOR_GCLOUD_RUN_SERVICE>
- It would show something like this
+It would show something like this
  ```json
   {
   "status": "This URI is working for the methods"
