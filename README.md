@@ -2,7 +2,7 @@
 
 **CryptoAnalyzer** is a cloud-native cryptocurrency analytics platform that fetches, processes, and stores market data from CoinGecko using a fully automated pipeline. This pipeline is dockerised, so it can run without the hassle of version mismatch for the dependencies(Trust me, faced the issue and learnt the hard way). It is beautifully designed with a powerful backend stack hosted on Google Cloud.
 
----
+
 
 ## 📦 What It Does
 
@@ -14,7 +14,7 @@
 - 🔐 Secured endpoints for data uploads and POST methods to make sure that your pipeline is free from outside tampering.
 - 🧠 LLM integrations (upcoming) will add auto-generated insights per coin
 
----
+
 
 ## 🧰 Tech Stack
 
@@ -22,13 +22,13 @@
 - **Backend:** Python, Flask, Docker
 - **Data Source:** [CoinGecko API](https://www.coingecko.com/en/api)
 
----
+
 
 # 🌐 Live API Endpoint
 
 **Base URL:**  [CryptoAnalyzer](https://crypto-analyzer-service-1073952782451.us-central1.run.app/)
 
----
+
 
 ## 📡 API Endpoints
 
@@ -38,7 +38,7 @@
 | `GET`  | `/coin/<symbol>` | Get full historical data for a specific coin |
 | `POST`  | `/run` | Triggers the pipeline to fill the hourly files and each of the crypto files |
 
----
+
 
 ## 🚀 Deployment
 
