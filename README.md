@@ -104,4 +104,5 @@ It would show something like this
 ```
 
 ## Frontend Demo Link
-  To Be Added soon
+  This one is a simple Demo with very limited capabilities of the pipeline data.
+  > [🚀 CryptoLiner](https://cryptoliner-demo.up.railway.app)
