@@ -105,4 +105,4 @@ It would show something like this
 
 ## Frontend Demo Link
   This one is a simple Demo with very limited capabilities of the pipeline data.
-  > [🚀 CryptoLiner](https://cryptoliner-demo.up.railway.app)
+  > [🚀 CryptoLiner](https://crypto-liner-asje.vercel.app/)
